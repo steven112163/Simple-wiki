@@ -34,7 +34,7 @@ class Block(models.Model):
     flammable = models.BooleanField(default=False)
     transparent = models.BooleanField(default=False)
     luminant = models.IntegerField()
-    tool = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True)
+    tool = models.ManyToManyField(Item)
     texture = models.ForeignKey(Texture, on_delete=models.SET_NULL, null=True)
     update = models.DateTimeField(auto_now=True)
 
@@ -49,3 +49,10 @@ class Block(models.Model):
         :return: Name of the block
         """
         return self.name
+
+    def display_tools(self):
+        """
+        String for representing first three tools
+        :return: Three names of the tools
+        """
+        return ', '.join(tool.name for tool in self.tool.filter(type__name='tool'))

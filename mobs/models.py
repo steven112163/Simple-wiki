@@ -29,7 +29,7 @@ class Mob(models.Model):
     """
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
-    # image = models.ImageField()
+    image = models.ImageField(upload_to='mobs', null=True)
     height = models.FloatField()
     width = models.FloatField()
     behavior = models.ForeignKey(Behavior, on_delete=models.SET_NULL, null=True)

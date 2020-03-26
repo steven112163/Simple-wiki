@@ -47,7 +47,7 @@ class Item(models.Model):
     """
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
-    # image = models.ImageField()
+    image = models.ImageField(upload_to='items', null=True)
     stackable = models.BooleanField(default=False)
     renewable = models.BooleanField(default=False)
     durability = models.IntegerField()

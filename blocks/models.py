@@ -29,7 +29,7 @@ class Block(models.Model):
     """
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
-    # image = models.ImageField()
+    image = models.ImageField(upload_to='blocks', null=True)
     stackable = models.BooleanField(default=False)
     flammable = models.BooleanField(default=False)
     transparent = models.BooleanField(default=False)

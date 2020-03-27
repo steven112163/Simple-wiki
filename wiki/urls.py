@@ -15,10 +15,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
 from django.conf.urls import include
+from django.conf.urls.static import static
+from rest_framework.routers import DefaultRouter
+from blocks.views import BlockViewSet
+from mobs.views import MobViewSet
+from items.views import ItemViewSet
+
+router = DefaultRouter()
+router.register(r'blocks', BlockViewSet)
+router.register(r'mobs', MobViewSet)
+router.register(r'items', ItemViewSet)
 
 urlpatterns = [
     path('jet/', include('jet.urls', 'jet')),
     path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     path('admin/', admin.site.urls),
+    path('', include(router.urls)),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -8,17 +8,17 @@ class Texture(models.Model):
     Model representing texture of the block
     """
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(u'名稱', max_length=100)
 
     class Meta:
         ordering = ['name']
-        verbose_name = 'Texture'
-        verbose_name_plural = 'Textures'
+        verbose_name = u'材質'
+        verbose_name_plural = u'材質'
 
     def __str__(self):
         """
-        String for representing the Model
-        :return: Name of the texture
+        String for representing the object
+        :return: Name of the object
         """
         return self.name
 
@@ -28,25 +28,25 @@ class Block(models.Model):
     Model representing a block
     """
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='blocks', null=True)
-    stackable = models.BooleanField(default=False)
-    flammable = models.BooleanField(default=False)
-    transparent = models.BooleanField(default=False)
-    luminant = models.IntegerField()
-    tool = models.ManyToManyField(Item)
-    texture = models.ForeignKey(Texture, on_delete=models.SET_NULL, null=True)
-    update = models.DateTimeField(auto_now=True)
+    name = models.CharField(u'名稱', max_length=100)
+    image = models.ImageField(u'圖片', upload_to='blocks', null=True)
+    stackable = models.BooleanField(u'可堆疊', default=False)
+    flammable = models.BooleanField(u'可燃性', default=False)
+    transparent = models.BooleanField(u'透明', default=False)
+    luminant = models.IntegerField(u'亮度')
+    tool = models.ManyToManyField(Item, verbose_name=u'工具')
+    texture = models.ForeignKey(Texture, verbose_name=u'材質', on_delete=models.SET_NULL, null=True)
+    update = models.DateTimeField(u'更新時間', auto_now=True)
 
     class Meta:
         ordering = ['name']
-        verbose_name = 'Block'
-        verbose_name_plural = 'Blocks'
+        verbose_name = u'方塊'
+        verbose_name_plural = u'方塊'
 
     def __str__(self):
         """
-        String for representing the Model
-        :return: Name of the block
+        String for representing the object
+        :return: Name of the object
         """
         return self.name
 

@@ -1,8 +1,20 @@
 from rest_framework import serializers
-from .models import Item
+from .models import Item, Material, Type
 
 
-class ItemSerializer(serializers.HyperlinkedModelSerializer):
+class MaterialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Material
+        fields = ['id', 'name']
+
+
+class TypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Type
+        fields = ['id', 'name']
+
+
+class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = ['id', 'name', 'image', 'stackable', 'renewable', 'durability', 'material', 'type', 'attack_damage',

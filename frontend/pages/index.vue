@@ -3,7 +3,7 @@
         <div class="text-box">
             <h1>My Website</h1>
             <p class="mt-3">Web we love ❤️ ️</p>
-            <nuxt-link class="btn btn-outline btn-large btn-info" to="/wiki/mobs">
+            <nuxt-link class="btn btn-outline btn-large btn-info" to="/wiki">
                 View Wiki <span class="ml-2">&rarr;</span>
             </nuxt-link>
         </div>

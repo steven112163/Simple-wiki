@@ -8,16 +8,16 @@
                 </div>
             </div>
             <template v-for="mob in mobs">
-                <b-card-group deck :key="mob.id">
+                <div class="card-deck" :key="mob.id">
                     <mob-card :mob="mob"></mob-card>
-                </b-card-group>
+                </div>
             </template>
         </div>
     </main>
 </template>
 
 <script>
-    import MobCard from "~/components/mob-card.vue";
+    import MobCard from "../../../components/mob-card.vue";
 
     export default {
         name: "index",

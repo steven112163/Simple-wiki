@@ -1,6 +1,4 @@
-# frontend
-
-> Nuxt.js frontend with Django backend
+# NuxtFrontend
 
 ## Build Setup
 

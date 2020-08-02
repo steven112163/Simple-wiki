@@ -1,20 +1,20 @@
 <template>
-    <div class="card">
-        <img class="card-img-top" :src="mob.image" alt="no image">
-        <div class="card-body">
-            <h5 class="card-title">{{ mob.name }}</h5>
-            <p class="card-text">
+    <b-card border-variant="dark">
+        <b-card-img :src="mob.image" alt="no image" top></b-card-img>
+        <b-card-body>
+            <b-card-title :title="mob.name" title-tag="h5"></b-card-title>
+            <b-card-text>
                 <strong>Height:</strong> {{ mob.height }}
-            </p>
-            <p class="card-text">
+            </b-card-text>
+            <b-card-text>
                 <strong>Width:</strong> {{ mob.width }}
-            </p>
-            <div class="card-footer">
+            </b-card-text>
+            <b-card-footer>
                 <nuxt-link :to="`/wiki/mobs/${mob.id}/`" class="btn btn-sm btn-success"> View</nuxt-link>
                 <!--<nuxt-link :to="`/wiki/mobs/${mob.id}/edit/`" class="btn btn-sm btn-primary"> Edit</nuxt-link>-->
-            </div>
-        </div>
-    </div>
+            </b-card-footer>
+        </b-card-body>
+    </b-card>
 </template>
 
 <script>

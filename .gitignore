@@ -3,5 +3,5 @@ __pycache__/
 migrations/
 settings.py
 static/
-!frontend/static/
+!NuxtFrontend/static/
 media/

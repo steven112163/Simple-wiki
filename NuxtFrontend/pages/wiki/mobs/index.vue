@@ -8,9 +8,9 @@
                 </div>
             </div>
             <template v-for="mob in mobs">
-                <div class="card-deck" :key="mob.id">
+                <b-card-group deck :key="mob.id">
                     <mob-card :mob="mob"></mob-card>
-                </div>
+                </b-card-group>
             </template>
         </div>
     </main>
@@ -26,6 +26,7 @@
                 title: "Wiki | Mobs"
             };
         },
+        layout: 'wiki',
         components: {
             MobCard
         },

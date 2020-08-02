@@ -1,10 +1,7 @@
 <template>
-    <nav-top></nav-top>
 </template>
 
 <script>
-    import NavTop from "../../components/common/navtop";
-
     export default {
         name: "index",
         head() {
@@ -12,7 +9,7 @@
                 title: "Wiki"
             };
         },
-        components: {NavTop}
+        layout: 'wiki'
     }
 </script>
 

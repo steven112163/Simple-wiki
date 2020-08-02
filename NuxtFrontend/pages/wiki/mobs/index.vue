@@ -35,7 +35,6 @@
                 let mobs = await $axios.$get(`/mobs/`);
                 return {mobs: mobs.results};
             } catch (e) {
-                console.log(e);
                 return {mobs: []};
             }
         },

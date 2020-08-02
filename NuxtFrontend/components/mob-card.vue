@@ -1,5 +1,6 @@
 <template>
-    <b-card border-variant="dark">
+    <b-card border-variant="dark" class="border-top-0 border-right-0 border-left-0 shadow-lg"
+            style="border-bottom-width: 4px">
         <b-card-img :src="mob.image" alt="no image" top></b-card-img>
         <b-card-body>
             <b-card-title :title="mob.name" title-tag="h5"></b-card-title>
@@ -25,6 +26,6 @@
 
 <style>
     .mob-card {
-        box-shadow: 0 1rem 1.5rem rgba(0,0,0,.6);
+        box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, .6);
     }
 </style>

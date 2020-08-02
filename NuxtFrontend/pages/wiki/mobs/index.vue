@@ -17,10 +17,10 @@
 </template>
 
 <script>
-    import MobCard from "../../../components/mob-card.vue";
+    import MobCard from "../../../components/mob-card";
 
     export default {
-        name: "index",
+        name: "mobsIndex",
         head() {
             return {
                 title: "Wiki | Mobs"

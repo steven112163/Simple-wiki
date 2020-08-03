@@ -12,6 +12,7 @@
                 <strong>Width:</strong> {{ mob.width }}
             </b-card-text>
             <b-card-footer>
+                <small class="text-muted">{{ mob.update }}</small>
                 <nuxt-link :to="`/wiki/mobs/${mob.id}/`" class="btn btn-sm btn-success"> View</nuxt-link>
                 <!--<nuxt-link :to="`/wiki/mobs/${mob.id}/edit/`" class="btn btn-sm btn-primary"> Edit</nuxt-link>-->
             </b-card-footer>

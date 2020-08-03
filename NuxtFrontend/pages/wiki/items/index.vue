@@ -4,7 +4,7 @@
             <div class="col-12 text-right mb-4">
                 <div class="d-flex justify-content-between">
                     <h3>Items</h3>
-                    <nuxt-link to="/items/add" class="btn btn-info">Add Item</nuxt-link>
+                    <nuxt-link to="/items/add" class="btn btn-primary">Add Item</nuxt-link>
                 </div>
             </div>
             <template v-for="item in items">
@@ -33,6 +33,12 @@
         async asyncData({$axios, params}) {
             try {
                 let items = await $axios.$get(`/items/`);
+                for (let res of items.results) {
+                    let idxDot = res.update.indexOf(".");
+                    let idxT = res.update.indexOf("T");
+                    res.update = res.update.substring(0, idxT) + " " + res.update.substring(idxT + 1, idxDot);
+                    console.log(res.update);
+                }
                 return {items: items.results};
             } catch (e) {
                 return {items: []};

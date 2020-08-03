@@ -6,12 +6,17 @@
             <b-card-title :title="block.name" title-tag="h4"></b-card-title>
             <hr/>
             <b-card-text>
-                <strong>Stackable:</strong> {{ block.stackable }}
+                <strong>Stackable:</strong>
+                <b-icon v-if="block.stackable" icon="check-square-fill" variant="success"></b-icon>
+                <b-icon v-else icon="x-square-fill" variant="danger"></b-icon>
             </b-card-text>
             <b-card-text>
-                <strong>Flammable:</strong> {{ block.flammable }}
+                <strong>Flammable:</strong>
+                <b-icon v-if="block.flammable" icon="check-square-fill" variant="success"></b-icon>
+                <b-icon v-else icon="x-square-fill" variant="danger"></b-icon>
             </b-card-text>
             <b-card-footer>
+                <small class="text-muted">{{ block.update }}</small>
                 <nuxt-link :to="`/wiki/blocks/${block.id}/`" class="btn btn-sm btn-success"> View</nuxt-link>
                 <!--<nuxt-link :to="`/wiki/blocks/${block.id}/edit/`" class="btn btn-sm btn-primary"> Edit</nuxt-link>-->
             </b-card-footer>
@@ -20,8 +25,15 @@
 </template>
 
 <script>
+    import {BIcon, BIconCheckSquareFill, BIconXSquareFill} from "bootstrap-vue";
+
     export default {
-        props: ["block"]
+        props: ["block"],
+        components: {
+            BIcon,
+            BIconCheckSquareFill,
+            BIconXSquareFill
+        }
     };
 </script>
 

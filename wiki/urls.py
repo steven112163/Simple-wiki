@@ -19,14 +19,18 @@ from django.conf import settings
 from django.conf.urls import include
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
-from blocks.views import BlockViewSet
-from mobs.views import MobViewSet
-from items.views import ItemViewSet
+from blocks.views import BlockViewSet, TextureViewSet
+from mobs.views import MobViewSet, BehaviorViewSet
+from items.views import ItemViewSet, MaterialViewSet, TypeViewSet
 
 router = DefaultRouter()
 router.register(r'blocks', BlockViewSet)
+router.register(r'blockTextures', TextureViewSet)
 router.register(r'mobs', MobViewSet)
+router.register(r'mobBehaviors', BehaviorViewSet)
 router.register(r'items', ItemViewSet)
+router.register(r'itemMaterials', MaterialViewSet)
+router.register(r'itemTypes', TypeViewSet)
 
 urlpatterns = [
     path('jet/', include('jet.urls', 'jet')),

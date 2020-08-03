@@ -1,7 +1,7 @@
 <template>
     <div>
         <navtop/>
-        <Nuxt/>
+        <Nuxt style="min-height: 1000px"/>
         <my-footer/>
     </div>
 </template>

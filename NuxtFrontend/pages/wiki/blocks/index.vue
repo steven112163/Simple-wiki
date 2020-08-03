@@ -37,7 +37,6 @@
                     let idxDot = res.update.indexOf(".");
                     let idxT = res.update.indexOf("T");
                     res.update = res.update.substring(0, idxT) + " " + res.update.substring(idxT + 1, idxDot);
-                    console.log(res.update);
                 }
                 return {blocks: blocks.results};
             } catch (e) {

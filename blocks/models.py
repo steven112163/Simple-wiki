@@ -40,8 +40,8 @@ class Block(models.Model):
 
     class Meta:
         ordering = ['name']
-        verbose_name = u'方塊'
-        verbose_name_plural = u'方塊'
+        verbose_name = u'- 方塊'
+        verbose_name_plural = u'- 方塊'
 
     def __str__(self):
         """

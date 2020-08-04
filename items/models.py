@@ -61,8 +61,8 @@ class Item(models.Model):
 
     class Meta:
         ordering = ['name']
-        verbose_name = u'物品'
-        verbose_name_plural = u'物品'
+        verbose_name = u'- 物品'
+        verbose_name_plural = u'- 物品'
 
     def __str__(self):
         """

@@ -39,8 +39,8 @@ class Mob(models.Model):
 
     class Meta:
         ordering = ['name']
-        verbose_name = u'生物'
-        verbose_name_plural = u'生物'
+        verbose_name = u'- 生物'
+        verbose_name_plural = u'- 生物'
 
     def __str__(self):
         """

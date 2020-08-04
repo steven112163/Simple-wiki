@@ -30,6 +30,7 @@ class Mob(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(u'名稱', max_length=100)
     image = models.ImageField(u'圖片', upload_to='mobs', null=True)
+    health_points = models.IntegerField(u'生命值', default=1)
     height = models.FloatField(u'高度')
     width = models.FloatField(u'寬度')
     behavior = models.ForeignKey(Behavior, verbose_name=u'行為', on_delete=models.SET_NULL, null=True)

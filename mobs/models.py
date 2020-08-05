@@ -33,8 +33,8 @@ class Mob(models.Model):
     health_points = models.IntegerField(u'生命值', default=1)
     height = models.FloatField(u'高度')
     width = models.FloatField(u'寬度')
-    behavior = models.ForeignKey(Behavior, verbose_name=u'行為', on_delete=models.SET_NULL, null=True)
-    attack_strength = models.IntegerField(u'攻擊力', blank=True)
+    behavior = models.ForeignKey(Behavior, verbose_name=u'行為', on_delete=models.SET_NULL, null=True, blank=True)
+    attack_strength = models.IntegerField(u'攻擊力', null=True, blank=True)
     spawn = RichTextField(u'生成')
     update = models.DateTimeField(u'更新時間', auto_now=True)
 

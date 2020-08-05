@@ -36,11 +36,11 @@
                         <th scope="row">Width</th>
                         <td>{{ mob.width }}</td>
                     </tr>
-                    <tr>
+                    <tr v-if="behavior">
                         <th scope="row">Behavior</th>
                         <td>{{ behavior.name }}</td>
                     </tr>
-                    <tr>
+                    <tr v-if="attack">
                         <th scope="row">Attack Strength</th>
                         <td>
                             <template v-for="i in attack">
@@ -77,15 +77,29 @@
         async asyncData({$axios, params}) {
             try {
                 let mob = await $axios.$get(`/mobs/${params.id}`);
+
+                // Parse date
                 let idxDot = mob.update.indexOf(".");
                 let idxT = mob.update.indexOf("T");
                 mob.update = mob.update.substring(0, idxT) + " " + mob.update.substring(idxT + 1, idxDot);
+
+                // Get number of hearts
                 let half_heart = (mob.health_points % 2) != 0 ? true : false;
                 let heart = half_heart ? ((mob.health_points - 1) / 2) : (mob.health_points / 2);
-                let half_attack = (mob.attack_strength % 2) != 0 ? true : false;
-                let attack = half_attack ? ((mob.attack_strength - 1) / 2) : (mob.attack_strength / 2);
-                let behaviorID = mob.behavior;
-                let behavior = await $axios.$get(`/mobBehaviors/${behaviorID}`);
+
+                // Get number of attack symbols
+                let half_attack = false;
+                let attack = false;
+                if (mob.attack_strength !== null) {
+                    half_attack = (mob.attack_strength % 2) != 0 ? true : false;
+                    attack = half_attack ? ((mob.attack_strength - 1) / 2) : (mob.attack_strength / 2);
+                }
+
+                // Get behavior
+                let behavior = false;
+                if (mob.behavior !== null)
+                    behavior = await $axios.$get(`/mobBehaviors/${mob.behavior}`);
+
                 return {
                     mob: mob,
                     behavior: behavior,

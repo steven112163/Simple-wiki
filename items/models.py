@@ -48,7 +48,7 @@ class Item(models.Model):
     """
     id = models.AutoField(primary_key=True)
     name = models.CharField(u'名稱', max_length=100)
-    image = models.ImageField(u'圖片', upload_to='items', null=True)
+    image = models.ImageField(u'圖片', upload_to='items', blank=True, null=True)
     stackable = models.BooleanField(u'可堆疊', default=False)
     renewable = models.BooleanField(u'可修理', default=False)
     durability = models.IntegerField(u'耐久度')

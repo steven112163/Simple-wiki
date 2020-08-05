@@ -29,7 +29,7 @@ class Mob(models.Model):
     """
     id = models.AutoField(primary_key=True)
     name = models.CharField(u'名稱', max_length=100)
-    image = models.ImageField(u'圖片', upload_to='mobs', null=True)
+    image = models.ImageField(u'圖片', upload_to='mobs', null=True, blank=True)
     health_points = models.IntegerField(u'生命值', default=1)
     height = models.FloatField(u'高度')
     width = models.FloatField(u'寬度')

@@ -29,13 +29,13 @@ class Block(models.Model):
     """
     id = models.AutoField(primary_key=True)
     name = models.CharField(u'名稱', max_length=100)
-    image = models.ImageField(u'圖片', upload_to='blocks', null=True)
+    image = models.ImageField(u'圖片', upload_to='blocks', blank=True, null=True)
     stackable = models.BooleanField(u'可堆疊', default=False)
     flammable = models.BooleanField(u'可燃性', default=False)
     transparent = models.BooleanField(u'透明', default=False)
     luminant = models.IntegerField(u'亮度')
-    tool = models.ManyToManyField(Item, verbose_name=u'工具')
-    texture = models.ForeignKey(Texture, verbose_name=u'材質', on_delete=models.SET_NULL, null=True)
+    tool = models.ManyToManyField(Item, verbose_name=u'工具', blank=True)
+    texture = models.ForeignKey(Texture, verbose_name=u'材質', on_delete=models.SET_NULL, blank=True, null=True)
     update = models.DateTimeField(u'更新時間', auto_now=True)
 
     class Meta:

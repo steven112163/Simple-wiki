@@ -1,19 +1,29 @@
 <template>
-    <main class="container mt-5">
-        <div class="row">
-            <div class="col-12 text-right mb-4">
-                <div class="d-flex justify-content-between">
-                    <h3>Items</h3>
-                    <nuxt-link to="/items/add" class="btn btn-primary">Add Item</nuxt-link>
+    <div>
+        <div class="jarallax">
+            <img class="jarallax-img" src="../../../static/images/items_para.jpg" alt="">
+            <div class="img-block">
+                <div class="img-words">
+                    <h1>Items</h1>
                 </div>
             </div>
-            <template v-for="item in items">
-                <b-card-group deck :key="item.id">
-                    <item-card :item="item"></item-card>
-                </b-card-group>
-            </template>
         </div>
-    </main>
+        <main class="container mt-5">
+            <div class="row">
+                <div class="col-12 text-right mb-4">
+                    <div class="d-flex justify-content-between">
+                        <h3>Items</h3>
+                        <nuxt-link to="/items/add" class="btn btn-primary">Add Item</nuxt-link>
+                    </div>
+                </div>
+                <template v-for="item in items">
+                    <b-card-group deck :key="item.id">
+                        <item-card :item="item"></item-card>
+                    </b-card-group>
+                </template>
+            </div>
+        </main>
+    </div>
 </template>
 
 <script>
@@ -52,5 +62,5 @@
 </script>
 
 <style scoped>
-
+    @import "assets/css/wiki-each.css";
 </style>

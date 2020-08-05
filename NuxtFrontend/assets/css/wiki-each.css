@@ -1,0 +1,17 @@
+h1 {
+    color: white;
+    font-size: 100px;
+}
+
+.img-block {
+    display: table;
+    height: 500px;
+    width: 100%;
+    background-color: rgba(35, 39, 51, .6);
+}
+
+.img-words {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}

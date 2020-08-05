@@ -48,5 +48,5 @@
 </script>
 
 <style scoped>
-    @import "assets/css/wiki.css";
+    @import "assets/css/wiki-index.css";
 </style>

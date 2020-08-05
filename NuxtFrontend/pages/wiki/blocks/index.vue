@@ -1,19 +1,29 @@
 <template>
-    <main class="container mt-5">
-        <div class="row">
-            <div class="col-12 text-right mb-4">
-                <div class="d-flex justify-content-between">
-                    <h3>Blocks</h3>
-                    <nuxt-link to="/blocks/add" class="btn btn-primary">Add Block</nuxt-link>
+    <div>
+        <div class="jarallax">
+            <img class="jarallax-img" src="../../../static/images/blocks_para.jpg" alt="">
+            <div class="img-block">
+                <div class="img-words">
+                    <h1>Blocks</h1>
                 </div>
             </div>
-            <template v-for="block in blocks">
-                <b-card-group deck :key="block.id">
-                    <block-card :block="block"></block-card>
-                </b-card-group>
-            </template>
         </div>
-    </main>
+        <main class="container mt-5">
+            <div class="row">
+                <div class="col-12 text-right mb-4">
+                    <div class="d-flex justify-content-between">
+                        <h3>Blocks</h3>
+                        <nuxt-link to="/blocks/add" class="btn btn-primary">Add Block</nuxt-link>
+                    </div>
+                </div>
+                <template v-for="block in blocks">
+                    <b-card-group deck :key="block.id">
+                        <block-card :block="block"></block-card>
+                    </b-card-group>
+                </template>
+            </div>
+        </main>
+    </div>
 </template>
 
 <script>
@@ -52,5 +62,5 @@
 </script>
 
 <style scoped>
-
+    @import "assets/css/wiki-each.css";
 </style>

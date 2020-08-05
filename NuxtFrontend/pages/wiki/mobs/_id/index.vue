@@ -40,7 +40,7 @@
                         <th scope="row">Behavior</th>
                         <td>{{ behavior.name }}</td>
                     </tr>
-                    <tr v-if="attack">
+                    <tr v-if="attack || half_attack">
                         <th scope="row">Attack Strength</th>
                         <td>
                             <template v-for="i in attack">
@@ -86,10 +86,10 @@
                 // Get number of hearts
                 let half_heart = (mob.health_points % 2) != 0 ? true : false;
                 let heart = half_heart ? ((mob.health_points - 1) / 2) : (mob.health_points / 2);
-                if (mob.health_points == 1)
-                    heart = 1;
-                else if (mob.health_points == 2)
-                    heart = 2;
+                if (mob.health_points == 1) {
+                    half_heart = true;
+                    heart = 0;
+                }
 
                 // Get number of attack symbols
                 let half_attack = false;
@@ -97,10 +97,10 @@
                 if (mob.attack_strength !== null) {
                     half_attack = (mob.attack_strength % 2) != 0 ? true : false;
                     attack = half_attack ? ((mob.attack_strength - 1) / 2) : (mob.attack_strength / 2);
-                    if (mob.attack_strength == 1)
+                    if (mob.attack_strength == 1) {
+                        half_attack = true;
                         attack = 1;
-                    else if (mob.attack_strength == 2)
-                        attack = 2;
+                    }
                 }
 
                 // Get behavior

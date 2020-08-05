@@ -45,7 +45,7 @@
                             <b-icon v-else icon="x-square-fill" variant="danger"></b-icon>
                         </td>
                     </tr>
-                    <tr v-if="attack">
+                    <tr v-if="attack || half_attack">
                         <th scope="row">Attack Damage</th>
                         <td>
                             <template v-for="i in attack">
@@ -61,7 +61,7 @@
                         <th scope="row">Attack Speed</th>
                         <td>{{ item.attack_speed }}</td>
                     </tr>
-                    <tr v-if="defense">
+                    <tr v-if="defense || half_defense">
                         <th scope="row">Defense Points</th>
                         <td>
                             <template v-for="i in defense">
@@ -115,10 +115,10 @@
                 if (item.attack_damage !== null) {
                     half_attack = (item.attack_damage % 2) != 0 ? true : false;
                     attack = half_attack ? ((item.attack_damage - 1) / 2) : (item.attack_damage / 2);
-                    if (item.attack_damage == 1)
+                    if (item.attack_damage == 1) {
+                        half_attack = true;
                         attack = 1;
-                    else if (item.attack_damage == 2)
-                        attack = 2;
+                    }
                 }
 
                 // Get number of defense symbols
@@ -127,10 +127,10 @@
                 if (item.defense_points !== null) {
                     half_defense = (item.defense_points % 2) != 0 ? true : false;
                     defense = half_defense ? ((item.defense_points - 1) / 2) : (item.defense_points / 2);
-                    if (item.defense_points == 1)
-                        defense = 1;
-                    else if (item.defense_points == 2)
-                        defense = 2;
+                    if (item.defense_points == 1) {
+                        half_defense = true;
+                        defense = 0;
+                    }
                 }
 
                 // Get material

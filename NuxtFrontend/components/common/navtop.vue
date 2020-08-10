@@ -22,14 +22,32 @@
                         <b-dropdown-item href="/wiki/blocks">Blocks</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
+
+                <b-navbar-nav class="ml-auto">
+                    <template v-if="!isAuthenticated">
+                        <b-nav-item href="/login"><em>Login</em></b-nav-item>
+                    </template>
+                    <template v-else>
+                        <b-nav-item-dropdown right>
+                            <template v-slot:button-content>
+                                <em>Hi</em>
+                            </template>
+                            <b-dropdown-item href="#">Logout</b-dropdown-item>
+                        </b-nav-item-dropdown>
+                    </template>
+                </b-navbar-nav>
             </b-collapse>
         </b-navbar>
     </div>
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
     export default {
-        name: "navtop"
+        name: "navtop",
+        computed: {
+            ...mapGetters(['isAuthenticated', 'loggedInUser'])
+        }
     }
 </script>
 

@@ -55,6 +55,7 @@ export default {
         // Doc: https://axios.nuxtjs.org/usage
         '@nuxtjs/axios',
         '@nuxtjs/pwa',
+        '@nuxtjs/auth'
     ],
     /*
     ** Axios module configuration
@@ -63,6 +64,33 @@ export default {
     axios: {
         baseURL: "http://localhost:8000/api"
     },
+    /*
+    ** Auth module configuration
+    ** See https://auth.nuxtjs.org/
+    */
+    auth: {
+        strategies: {
+            local: {
+                login: {
+                    url: '/token/',
+                    method: 'post',
+                    propertyName: 'access',
+                    altProperty: 'refresh'
+                },
+                logout: false,
+                user: false
+            }
+        },
+        redirect: {
+            login: '/login'
+        }
+    },
+    /*
+    ** Auth router configuration
+    */
+    //router: {
+    //    middleware: ['auth']
+    //},
     /*
     ** Build configuration
     ** See https://nuxtjs.org/api/configuration-build/

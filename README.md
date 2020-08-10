@@ -9,6 +9,7 @@ A simple website using Django REST and Nuxt.js
     * django-3-jet >= 1.0.7
     * djangorestframework >= 3.11.0
     * django-cors-headers >= 3.2.1
+    * djangorestframework-simplejwt >= 4.4.0
 * feedparser >= 5.2.1
 * mysqlclient >= 1.4.6
 ### Frontend

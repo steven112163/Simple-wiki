@@ -17,7 +17,7 @@
                         <b-form-group label="Account" label-for="account-input">
                             <b-form-input
                                     id="account-input"
-                                    v-model="form.account"
+                                    v-model="form.username"
                                     placeholder="Enter your account"
                             ></b-form-input>
                         </b-form-group>
@@ -50,6 +50,7 @@
 
 <script>
     import notification from "@/components/common/notification";
+
     export default {
         name: "login",
         head() {
@@ -64,7 +65,7 @@
         data() {
             return {
                 form: {
-                    account: '',
+                    username: '',
                     password: ''
                 },
                 show: true,
@@ -72,11 +73,19 @@
             }
         },
         methods: {
-            onSubmit(event) {
-                // TODO
+            async onSubmit(event) {
+                try {
+                    await this.$auth.loginWith('local', {
+                        data: this.form
+                    });
+                    this.$auth.setUser({username: this.form.username});
+                    await this.$router.push('/wiki');
+                } catch (e) {
+                    this.error = e.response.data;
+                }
             },
             onReset(event) {
-                this.form.account = '';
+                this.form.username = '';
                 this.form.password = '';
                 this.show = false;
                 this.$nextTick(() => {

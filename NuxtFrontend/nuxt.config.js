@@ -71,18 +71,21 @@ export default {
     auth: {
         strategies: {
             local: {
-                login: {
-                    url: '/token/',
-                    method: 'post',
-                    propertyName: 'access',
-                    altProperty: 'refresh'
-                },
-                logout: false,
-                user: false
+                endpoints: {
+                    login: {
+                        url: '/token/',
+                        method: 'post',
+                        propertyName: 'access',
+                        altProperty: 'refresh'
+                    },
+                    logout: false,
+                    user: false
+                }
             }
         },
         redirect: {
-            login: '/login'
+            login: '/login',
+            logout: '/wiki'
         }
     },
     /*

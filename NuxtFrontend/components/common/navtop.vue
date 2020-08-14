@@ -25,14 +25,16 @@
 
                 <b-navbar-nav class="ml-auto">
                     <template v-if="!isAuthenticated">
+                        <b-nav-item href="#"><em>Register</em></b-nav-item>
                         <b-nav-item href="/login"><em>Login</em></b-nav-item>
                     </template>
                     <template v-else>
                         <b-nav-item-dropdown right>
                             <template v-slot:button-content>
-                                <em>Hi</em>
+                                <em>Hi! {{ loggedInUser }}</em>
                             </template>
-                            <b-dropdown-item href="#">Logout</b-dropdown-item>
+                            <b-dropdown-item href="#">Profile</b-dropdown-item>
+                            <b-dropdown-item @click="logout">Logout</b-dropdown-item>
                         </b-nav-item-dropdown>
                     </template>
                 </b-navbar-nav>
@@ -42,11 +44,17 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex';
+    import {mapGetters} from 'vuex';
+
     export default {
         name: "navtop",
         computed: {
             ...mapGetters(['isAuthenticated', 'loggedInUser'])
+        },
+        methods: {
+            async logout() {
+                await this.$auth.logout();
+            }
         }
     }
 </script>

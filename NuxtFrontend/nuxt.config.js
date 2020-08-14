@@ -28,7 +28,8 @@ export default {
     ** Global CSS
     */
     css: [
-        "@/assets/css/wiki-jarallax.css"
+        "@/assets/css/wiki-jarallax.css",
+        "@/assets/css/transition.css"
     ],
     /*
     ** Plugins to load before mounting the App

@@ -11,10 +11,12 @@
             <b-card-text>
                 <strong>Width:</strong> {{ mob.width }}
             </b-card-text>
+            <nuxt-link is="b-button" block :to="`/wiki/mobs/${mob.id}/`" variant="success" size="sm">View</nuxt-link>
+            <nuxt-link is="b-button" block :to="`/wiki/mobs/${mob.id}/edit/`" variant="secondary" size="sm"
+                       v-if="isAuthenticated">Edit
+            </nuxt-link>
             <b-card-footer>
                 <small class="text-muted">{{ mob.update }}</small>
-                <nuxt-link :to="`/wiki/mobs/${mob.id}/`" class="btn btn-sm btn-success"> View</nuxt-link>
-                <!--<nuxt-link :to="`/wiki/mobs/${mob.id}/edit/`" class="btn btn-sm btn-primary"> Edit</nuxt-link>-->
             </b-card-footer>
         </b-card-body>
     </b-card>
@@ -23,7 +25,7 @@
 <script>
     export default {
         name: "mobCard",
-        props: ["mob"]
+        props: ["mob", "isAuthenticated"]
     };
 </script>
 

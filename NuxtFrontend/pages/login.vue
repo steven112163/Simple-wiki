@@ -78,8 +78,9 @@
                     await this.$auth.loginWith('local', {
                         data: this.form
                     });
-                    this.$auth.setUser({username: this.form.username});
                     await this.$router.push('/wiki');
+                    if (process.client)
+                        localStorage.setItem('username', this.form.username);
                 } catch (e) {
                     this.error = e.response.data;
                 }

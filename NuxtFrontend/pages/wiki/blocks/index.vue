@@ -8,26 +8,25 @@
                 </div>
             </div>
         </div>
-        <main class="container mt-5">
-            <div class="row">
-                <div class="col-12 text-right mb-4">
-                    <div class="d-flex justify-content-between">
-                        <h3>Blocks</h3>
-                        <nuxt-link to="/blocks/add" class="btn btn-primary">Add Block</nuxt-link>
-                    </div>
-                </div>
+        <b-container class="mt-5">
+            <b-row class="mb-4 d-flex justify-content-between">
+                <h3>Blocks</h3>
+                <nuxt-link is="b-button" to="/blocks/add" variant="primary" v-if="isAuthenticated">Add Block</nuxt-link>
+            </b-row>
+            <b-row>
                 <template v-for="block in blocks">
                     <b-card-group deck :key="block.id">
-                        <block-card :block="block"></block-card>
+                        <block-card :block="block" :is-authenticated="isAuthenticated"></block-card>
                     </b-card-group>
                 </template>
-            </div>
-        </main>
+            </b-row>
+        </b-container>
     </div>
 </template>
 
 <script>
     import BlockCard from "../../../components/block-card";
+    import {mapGetters} from "vuex";
 
     export default {
         name: "blocksIndex",
@@ -39,6 +38,9 @@
         layout: 'wiki',
         components: {
             BlockCard
+        },
+        computed: {
+            ...mapGetters(['isAuthenticated'])
         },
         async asyncData({$axios, params}) {
             try {

@@ -15,10 +15,13 @@
                 <b-icon v-if="block.flammable" icon="check-square-fill" variant="success"></b-icon>
                 <b-icon v-else icon="x-square-fill" variant="danger"></b-icon>
             </b-card-text>
+            <nuxt-link is="b-button" block :to="`/wiki/blocks/${block.id}/`" variant="success" size="sm"> View
+            </nuxt-link>
+            <nuxt-link is="b-button" block :to="`/wiki/blocks/${block.id}/edit/`" variant="secondary" size="sm"
+                       v-if="isAuthenticated"> Edit
+            </nuxt-link>
             <b-card-footer>
                 <small class="text-muted">{{ block.update }}</small>
-                <nuxt-link :to="`/wiki/blocks/${block.id}/`" class="btn btn-sm btn-success"> View</nuxt-link>
-                <!--<nuxt-link :to="`/wiki/blocks/${block.id}/edit/`" class="btn btn-sm btn-primary"> Edit</nuxt-link>-->
             </b-card-footer>
         </b-card-body>
     </b-card>
@@ -28,7 +31,7 @@
     import {BIcon, BIconCheckSquareFill, BIconXSquareFill} from "bootstrap-vue";
 
     export default {
-        props: ["block"],
+        props: ["block", "isAuthenticated"],
         components: {
             BIcon,
             BIconCheckSquareFill,

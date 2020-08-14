@@ -15,10 +15,12 @@
                 <b-icon v-if="item.renewable" icon="check-square-fill" variant="success"></b-icon>
                 <b-icon v-else icon="x-square-fill" variant="danger"></b-icon>
             </b-card-text>
+            <nuxt-link is="b-button" block :to="`/wiki/items/${item.id}/`" variant="success" size="sm">View</nuxt-link>
+            <nuxt-link is="b-button" block :to="`/wiki/items/${item.id}/edit/`" variant="secondary" size="sm"
+                       v-if="isAuthenticated">Edit
+            </nuxt-link>
             <b-card-footer>
                 <small class="text-muted">{{ item.update }}</small>
-                <nuxt-link :to="`/wiki/items/${item.id}/`" class="btn btn-sm btn-success ml-auto"> View</nuxt-link>
-                <!--<nuxt-link :to="`/wiki/items/${item.id}/edit/`" class="btn btn-sm btn-primary"> Edit</nuxt-link>-->
             </b-card-footer>
         </b-card-body>
     </b-card>
@@ -28,7 +30,7 @@
     import {BIcon, BIconCheckSquareFill, BIconXSquareFill} from "bootstrap-vue";
 
     export default {
-        props: ["item"],
+        props: ["item", "isAuthenticated"],
         components: {
             BIcon,
             BIconCheckSquareFill,

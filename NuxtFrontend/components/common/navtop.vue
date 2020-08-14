@@ -16,24 +16,25 @@
                 <b-navbar-nav>
                     <!-- Dropdown -->
                     <b-nav-item-dropdown text="Wiki">
-                        <b-dropdown-item href="/wiki">Wiki Home page</b-dropdown-item>
-                        <b-dropdown-item href="/wiki/mobs">Mobs</b-dropdown-item>
-                        <b-dropdown-item href="/wiki/items">Items</b-dropdown-item>
-                        <b-dropdown-item href="/wiki/blocks">Blocks</b-dropdown-item>
+                        <nuxt-link is="b-dropdown-item" to="/wiki">Wiki Home page</nuxt-link>
+                        <nuxt-link is="b-dropdown-item" to="/wiki/mobs">Mobs</nuxt-link>
+                        <nuxt-link is="b-dropdown-item" to="/wiki/items">Items</nuxt-link>
+                        <nuxt-link is="b-dropdown-item" to="/wiki/blocks">Blocks</nuxt-link>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
 
+                <!-- User information -->
                 <b-navbar-nav class="ml-auto">
                     <template v-if="!isAuthenticated">
-                        <b-nav-item href="#"><em>Register</em></b-nav-item>
-                        <b-nav-item href="/login"><em>Login</em></b-nav-item>
+                        <nuxt-link is="b-nav-item" to="#"><em>Register</em></nuxt-link>
+                        <nuxt-link is="b-nav-item" to="/login"><em>Login</em></nuxt-link>
                     </template>
                     <template v-else>
                         <b-nav-item-dropdown right>
                             <template v-slot:button-content>
-                                <em>Hi! {{ loggedInUser }}</em>
+                                <em>Hi! {{ getUser }}</em>
                             </template>
-                            <b-dropdown-item href="#">Profile</b-dropdown-item>
+                            <nuxt-link is="b-dropdown-item" to="#">Profile</nuxt-link>
                             <b-dropdown-item @click="logout">Logout</b-dropdown-item>
                         </b-nav-item-dropdown>
                     </template>
@@ -49,11 +50,17 @@
     export default {
         name: "navtop",
         computed: {
-            ...mapGetters(['isAuthenticated', 'loggedInUser'])
+            ...mapGetters(['isAuthenticated']),
+            getUser() {
+                if (process.client)
+                    return localStorage.getItem('username')
+            }
         },
         methods: {
             async logout() {
                 await this.$auth.logout();
+                if (process.client)
+                    localStorage.removeItem('username');
             }
         }
     }

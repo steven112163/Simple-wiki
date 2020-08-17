@@ -20,7 +20,7 @@ from django.conf.urls import include
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 from blocks.views import BlockViewSet, TextureViewSet
-from mobs.views import MobViewSet, BehaviorViewSet
+from mobs.views import MobViewSet, BehaviorViewSet, UserCreate
 from items.views import ItemViewSet, MaterialViewSet, TypeViewSet
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
@@ -40,6 +40,7 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/user/create', UserCreate.as_view(), name='user_creation'),
 ]
 
 if settings.DEBUG:

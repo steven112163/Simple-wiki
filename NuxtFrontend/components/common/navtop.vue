@@ -26,7 +26,7 @@
                 <!-- User information -->
                 <b-navbar-nav class="ml-auto">
                     <template v-if="!isAuthenticated">
-                        <nuxt-link is="b-nav-item" to="#"><em>Register</em></nuxt-link>
+                        <nuxt-link is="b-nav-item" to="/register"><em>Register</em></nuxt-link>
                         <nuxt-link is="b-nav-item" to="/login"><em>Login</em></nuxt-link>
                     </template>
                     <template v-else>

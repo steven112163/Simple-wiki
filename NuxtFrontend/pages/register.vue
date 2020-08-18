@@ -96,10 +96,8 @@
                             password: this.form.password
                         }
                     });
-
-                    await this.$router.push('/wiki');
-                    if (process.client)
-                        localStorage.setItem('username', this.form.username);
+                    this.$auth.$storage.setUniversal('username', this.form.username);
+                    await this.$router.replace('/wiki');
                 } catch (e) {
                     this.error = e.response.data;
                 }

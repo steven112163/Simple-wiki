@@ -52,15 +52,15 @@
         computed: {
             ...mapGetters(['isAuthenticated']),
             getUser() {
-                if (process.client)
-                    return localStorage.getItem('username')
+                this.$auth.$storage.syncUniversal('username');
+                return this.$auth.$storage.getUniversal('username');
             }
         },
         methods: {
             async logout() {
                 await this.$auth.logout();
-                if (process.client)
-                    localStorage.removeItem('username');
+                this.$auth.$storage.removeUniversal('username');
+                await this.$router.push('/wiki');
             }
         }
     }

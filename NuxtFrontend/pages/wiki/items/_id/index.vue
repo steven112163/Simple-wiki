@@ -1,5 +1,10 @@
 <template>
     <b-container class="my-5">
+        <b-row class="text-right mb-3">
+            <b-col>
+                <nuxt-link is="b-button" to="/wiki/items" variant="success">Back</nuxt-link>
+            </b-col>
+        </b-row>
         <b-row>
             <b-col cols="4">
                 <h1>{{ item.name }}</h1>

@@ -90,12 +90,6 @@ export default {
         }
     },
     /*
-    ** Auth router configuration
-    */
-    //router: {
-    //    middleware: ['auth']
-    //},
-    /*
     ** Build configuration
     ** See https://nuxtjs.org/api/configuration-build/
     */

@@ -11,7 +11,7 @@
         <b-container class="mt-5">
             <b-row class="mb-4 d-flex justify-content-between">
                 <h3>Items</h3>
-                <nuxt-link is="b-button" to="/items/add" variant="primary" v-if="isAuthenticated">Add Item</nuxt-link>
+                <nuxt-link is="b-button" to="/wiki/items/add" variant="primary" v-if="isAuthenticated">Add Item</nuxt-link>
             </b-row>
             <b-row>
                 <template v-for="item in items">

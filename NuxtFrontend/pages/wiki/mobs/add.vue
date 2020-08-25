@@ -97,7 +97,27 @@
                             </tr>
                             <tr>
                                 <th scope="row">Behavior</th>
-                                <td>behavior TODO</td>
+                                <td>
+                                    <b-form-row>
+                                        <b-col>
+                                            <b-form-group>
+                                                <b-form-select v-model="mob.behavior" :options="options"
+                                                               v-if="!newBehavior"></b-form-select>
+                                                <b-form-input
+                                                        id="behavior-input"
+                                                        v-model="mob.behavior"
+                                                        placeholder="Enter new behavior"
+                                                        v-else
+                                                ></b-form-input>
+                                            </b-form-group>
+                                        </b-col>
+                                        <b-col cols="2">
+                                            <b-button variant="primary" @click="addBehavior">
+                                                <b-icon icon="plus" variant="white"></b-icon>
+                                            </b-button>
+                                        </b-col>
+                                    </b-form-row>
+                                </td>
                             </tr>
                             <tr>
                                 <th scope="row">Attack Strength</th>
@@ -143,6 +163,7 @@
 
 <script>
     import notification from "@/components/common/notification";
+    import {BIcon, BIconPlus} from 'bootstrap-vue';
 
     export default {
         name: "mobAdd",
@@ -154,13 +175,60 @@
         layout: 'wiki',
         middleware: 'auth',
         components: {
-            notification
+            notification,
+            BIcon,
+            BIconPlus
+        },
+        async asyncData({$axios, params}) {
+            try {
+                let behaviors = await $axios.$get(`/mobBehaviors/`);
+                let options = [{value: null, text: 'Please select a behavior'}];
+                for (let b of behaviors.results) {
+                    options.push({value: b.id, text: b.name});
+                }
+
+                return {
+                    mob: {
+                        name: "",
+                        image: null,
+                        health_points: "",
+                        height: "",
+                        width: "",
+                        behavior: null,
+                        attack_strength: "",
+                        spawn: ""
+                    },
+                    preview: false,
+                    error: null,
+                    show: true,
+                    options: options,
+                    newBehavior: false
+                }
+            } catch (e) {
+                return {
+                    mob: {
+                        name: "",
+                        image: null,
+                        health_points: "",
+                        height: "",
+                        width: "",
+                        behavior: null,
+                        attack_strength: "",
+                        spawn: ""
+                    },
+                    preview: false,
+                    error: null,
+                    show: true,
+                    options: [],
+                    newBehavior: false
+                }
+            }
         },
         data() {
             return {
                 mob: {
                     name: "",
-                    image: "",
+                    image: null,
                     health_points: "",
                     height: "",
                     width: "",
@@ -170,7 +238,9 @@
                 },
                 preview: false,
                 error: null,
-                show: true
+                show: true,
+                options: [],
+                newBehavior: false
             };
         },
         methods: {
@@ -189,6 +259,9 @@
                     vm.preview = e.target.result;
                 };
                 reader.readAsDataURL(file);
+            },
+            addBehavior(event) {
+                this.newBehavior = this.newBehavior ? false : true;
             },
             async onSubmit(event) {
                 // TODO

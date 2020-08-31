@@ -8,7 +8,7 @@ class Texture(models.Model):
     Model representing texture of the block
     """
     id = models.AutoField(primary_key=True)
-    name = models.CharField(u'名稱', max_length=100)
+    name = models.CharField(u'名稱', max_length=100, unique=True)
 
     class Meta:
         ordering = ['name']

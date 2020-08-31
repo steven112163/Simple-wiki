@@ -11,14 +11,14 @@
         <b-container class="mt-5">
             <b-row class="mb-4 d-flex justify-content-between">
                 <h3>Blocks</h3>
-                <nuxt-link is="b-button" to="/wiki/blocks/add" variant="primary" v-if="isAuthenticated">Add Block</nuxt-link>
+                <nuxt-link is="b-button" to="/wiki/blocks/add" variant="primary" v-if="isAuthenticated">Add Block
+                </nuxt-link>
             </b-row>
             <b-row>
-                <template v-for="block in blocks">
-                    <b-card-group deck :key="block.id">
-                        <block-card :block="block" :is-authenticated="isAuthenticated"></block-card>
-                    </b-card-group>
-                </template>
+                <b-card-group deck>
+                    <block-card v-for="block in blocks" :key="block.id" :block="block"
+                                :is-authenticated="isAuthenticated"></block-card>
+                </b-card-group>
             </b-row>
         </b-container>
     </div>

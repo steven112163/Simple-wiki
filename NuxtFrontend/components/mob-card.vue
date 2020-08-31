@@ -7,9 +7,11 @@
         <hr/>
         <b-card-text class="text-center">
             <strong>Height:</strong> {{ mob.height }}
+            <b-icon icon="arrow-down-up" variant="primary"></b-icon>
         </b-card-text>
         <b-card-text class="text-center">
             <strong>Width:</strong> {{ mob.width }}
+            <b-icon icon="arrow-left-right" variant="primary"></b-icon>
         </b-card-text>
         <nuxt-link is="b-button" block :to="`/wiki/mobs/${mob.id}/`" variant="success" size="sm">View</nuxt-link>
         <nuxt-link is="b-button" block :to="`/wiki/mobs/${mob.id}/edit/`" variant="secondary" size="sm"
@@ -22,9 +24,16 @@
 </template>
 
 <script>
+    import {BIcon, BIconArrowDownUp, BIconArrowLeftRight} from "bootstrap-vue";
+
     export default {
         name: "mobCard",
-        props: ["mob", "isAuthenticated"]
+        props: ["mob", "isAuthenticated"],
+        components: {
+            BIcon,
+            BIconArrowDownUp,
+            BIconArrowLeftRight
+        }
     };
 </script>
 

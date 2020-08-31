@@ -48,16 +48,16 @@ class MobSerializer(serializers.ModelSerializer):
                   'update']
 
     def create(self, validated_data):
+        # Create object behavior if it does not exist
         behavior = validated_data['behavior']
         if behavior is not None:
             behaviors = Behavior.objects.filter(name=behavior)
             if len(behaviors) > 0:
                 behavior = behaviors[0]
             else:
-                behavior = Behavior.objects.create(name=behavior)
-                behavior.save()
-        else:
-            behavior = None
+                behavior = None
+
+        # Create new mob
         mob = Mob.objects.create(
             name=validated_data['name'],
             image=validated_data['image'],

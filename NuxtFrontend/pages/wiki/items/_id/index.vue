@@ -16,7 +16,8 @@
         <hr/>
         <b-row>
             <b-col class="text-center" cols="4">
-                <b-img fluid rounded :src="item.image" alt=""></b-img>
+                <b-img v-if="item.image" fluid rounded :src="item.image" alt=""></b-img>
+                <b-img v-else fluid rounded src="https://img.icons8.com/color/480/000000/image.png" alt=""></b-img>
             </b-col>
             <b-col cols="8">
                 <table class="table table-hover">
@@ -30,7 +31,7 @@
                         <td>{{ type.name }}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Health Points</th>
+                        <th scope="row">Durability</th>
                         <td>
                             <b-icon icon="battery-full" variant="primary"></b-icon>
                             <span> {{ item.durability }}</span>
@@ -62,7 +63,7 @@
                             <span> ({{ item.attack_damage }})</span>
                         </td>
                     </tr>
-                    <tr>
+                    <tr v-if="item.attack_speed">
                         <th scope="row">Attack Speed</th>
                         <td>{{ item.attack_speed }}</td>
                     </tr>

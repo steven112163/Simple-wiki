@@ -279,14 +279,14 @@
                 this.mob.behavior = null;
             },
             async onSubmit(event) {
-                let formData = new FormData();
-                for (let data in this.mob) {
-                    console.log(data, this.mob[data]);
-                    formData.append(data, this.mob[data]);
-                }
-                console.log(this.mob);
                 try {
                     // Create new behavior if newBehavior is true
+                    if (this.newBehavior) {
+                        let res = await this.$axios.$post(`/mobBehaviors/`, {name: this.mob.behavior});
+                        this.mob.behavior = res.id;
+                    }
+
+                    // Create new mob
                     await this.$axios.$post(`/mobs/`, this.mob);
                     await this.$router.replace('/wiki/mobs');
                 } catch (e) {

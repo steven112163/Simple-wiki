@@ -7,7 +7,7 @@ class Material(models.Model):
     Model representing the material
     """
     id = models.AutoField(primary_key=True)
-    name = models.CharField(u'名稱', max_length=100)
+    name = models.CharField(u'名稱', max_length=100, unique=True)
 
     class Meta:
         ordering = ['name']
@@ -27,7 +27,7 @@ class Type(models.Model):
     Model representing the type
     """
     id = models.AutoField(primary_key=True)
-    name = models.CharField(u'名稱', max_length=100)
+    name = models.CharField(u'名稱', max_length=100, unique=True)
 
     class Meta:
         ordering = ['name']

@@ -46,3 +46,27 @@ class MobSerializer(serializers.ModelSerializer):
         model = Mob
         fields = ['id', 'name', 'image', 'health_points', 'height', 'width', 'behavior', 'attack_strength', 'spawn',
                   'update']
+
+    def create(self, validated_data):
+        behavior = validated_data['behavior']
+        if behavior is not None:
+            behaviors = Behavior.objects.filter(name=behavior)
+            if len(behaviors) > 0:
+                behavior = behaviors[0]
+            else:
+                behavior = Behavior.objects.create(name=behavior)
+                behavior.save()
+        else:
+            behavior = None
+        mob = Mob.objects.create(
+            name=validated_data['name'],
+            image=validated_data['image'],
+            health_points=validated_data['health_points'],
+            height=validated_data['height'],
+            width=validated_data['width'],
+            behavior=behavior,
+            attack_strength=validated_data['attack_strength'],
+            spawn=validated_data['spawn']
+        )
+        mob.save()
+        return mob

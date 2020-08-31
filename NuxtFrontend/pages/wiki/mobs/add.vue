@@ -30,7 +30,10 @@
                         <table class="table table-hover">
                             <tbody>
                             <tr>
-                                <th scope="row">Name</th>
+                                <th scope="row">
+                                    Name
+                                    <b-icon icon="asterisk" variant="danger" font-scale="0.5" shift-v="16"></b-icon>
+                                </th>
                                 <td>
                                     <b-form-group>
                                         <b-form-input
@@ -48,7 +51,7 @@
                                         <b-form-file
                                                 id="image-file"
                                                 v-model="mob.image"
-                                                accept="image/*"
+                                                accept="image/jpeg, image/png, image/gif"
                                                 @change="onFileChange"
                                                 placeholder="Choose a file or drop it here"
                                                 drop-placeholder="Drop file here"
@@ -57,7 +60,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th scope="row">Health Points</th>
+                                <th scope="row">
+                                    Health Points
+                                    <b-icon icon="asterisk" variant="danger" font-scale="0.5" shift-v="16"></b-icon>
+                                </th>
                                 <td>
                                     <b-form-group>
                                         <b-form-input
@@ -70,7 +76,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th scope="row">Height</th>
+                                <th scope="row">
+                                    Height
+                                    <b-icon icon="asterisk" variant="danger" font-scale="0.5" shift-v="16"></b-icon>
+                                </th>
                                 <td>
                                     <b-form-group>
                                         <b-form-input
@@ -83,7 +92,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th scope="row">Width</th>
+                                <th scope="row">
+                                    Width
+                                    <b-icon icon="asterisk" variant="danger" font-scale="0.5" shift-v="16"></b-icon>
+                                </th>
                                 <td>
                                     <b-form-group>
                                         <b-form-input
@@ -133,7 +145,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th scope="row">Spawn</th>
+                                <th scope="row">
+                                    Spawn
+                                    <b-icon icon="asterisk" variant="danger" font-scale="0.5" shift-v="16"></b-icon>
+                                </th>
                                 <td>
                                     <b-form-group>
                                         <b-form-textarea
@@ -163,7 +178,7 @@
 
 <script>
     import notification from "@/components/common/notification";
-    import {BIcon, BIconPlus} from 'bootstrap-vue';
+    import {BIcon, BIconPlus, BIconAsterisk} from 'bootstrap-vue';
 
     export default {
         name: "mobAdd",
@@ -177,7 +192,8 @@
         components: {
             notification,
             BIcon,
-            BIconPlus
+            BIconPlus,
+            BIconAsterisk
         },
         async asyncData({$axios, params}) {
             try {
@@ -191,11 +207,11 @@
                     mob: {
                         name: "",
                         image: null,
-                        health_points: "",
-                        height: "",
-                        width: "",
+                        health_points: null,
+                        height: null,
+                        width: null,
                         behavior: null,
-                        attack_strength: "",
+                        attack_strength: null,
                         spawn: ""
                     },
                     preview: false,
@@ -209,11 +225,11 @@
                     mob: {
                         name: "",
                         image: null,
-                        health_points: "",
-                        height: "",
-                        width: "",
+                        health_points: null,
+                        height: null,
+                        width: null,
                         behavior: null,
-                        attack_strength: "",
+                        attack_strength: null,
                         spawn: ""
                     },
                     preview: false,
@@ -229,11 +245,11 @@
                 mob: {
                     name: "",
                     image: null,
-                    health_points: "",
-                    height: "",
-                    width: "",
+                    health_points: null,
+                    height: null,
+                    width: null,
                     behavior: null,
-                    attack_strength: "",
+                    attack_strength: null,
                     spawn: ""
                 },
                 preview: false,
@@ -246,34 +262,45 @@
         methods: {
             onFileChange(e) {
                 let files = e.target.files || e.dataTransfer.files;
-                if (!files.length) {
+                if (!files.length)
                     return;
-                }
                 this.mob.image = files[0];
                 this.createImage(files[0]);
             },
             createImage(file) {
                 let reader = new FileReader();
-                let vm = this;
                 reader.onload = e => {
-                    vm.preview = e.target.result;
+                    this.preview = e.target.result;
                 };
                 reader.readAsDataURL(file);
             },
             addBehavior(event) {
                 this.newBehavior = this.newBehavior ? false : true;
+                this.mob.behavior = null;
             },
             async onSubmit(event) {
-                // TODO
+                let formData = new FormData();
+                for (let data in this.mob) {
+                    console.log(data, this.mob[data]);
+                    formData.append(data, this.mob[data]);
+                }
+                console.log(this.mob);
+                try {
+                    // Create new behavior if newBehavior is true
+                    await this.$axios.$post(`/mobs/`, this.mob);
+                    await this.$router.replace('/wiki/mobs');
+                } catch (e) {
+                    this.error = e.response.data;
+                }
             },
             onReset(event) {
                 this.mob.name = "";
-                this.mob.image = "";
-                this.mob.health_points = "";
-                this.mob.height = "";
-                this.mob.width = "";
+                this.mob.image = null;
+                this.mob.health_points = null;
+                this.mob.height = null;
+                this.mob.width = null;
                 this.mob.behavior = null;
-                this.mob.attack_strength = "";
+                this.mob.attack_strength = null;
                 this.mob.spawn = "";
                 this.preview = false;
                 this.error = null;

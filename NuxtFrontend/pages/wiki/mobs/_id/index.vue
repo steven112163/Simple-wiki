@@ -16,7 +16,8 @@
         <hr/>
         <b-row>
             <b-col class="text-center" cols="4">
-                <b-img fluid rounded :src="mob.image" alt=""></b-img>
+                <b-img v-if="mob.image" fluid rounded :src="mob.image" alt=""></b-img>
+                <b-img v-else fluid rounded src="https://img.icons8.com/color/480/000000/image.png" alt=""></b-img>
             </b-col>
             <b-col cols="8">
                 <table class="table table-hover">

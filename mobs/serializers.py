@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from drf_extra_fields.fields import Base64ImageField
 from .models import Mob, Behavior
 from django.contrib.auth.models import User
 import re
@@ -42,31 +43,9 @@ class BehaviorSerializer(serializers.ModelSerializer):
 
 
 class MobSerializer(serializers.ModelSerializer):
+    image = Base64ImageField(required=False)
+
     class Meta:
         model = Mob
         fields = ['id', 'name', 'image', 'health_points', 'height', 'width', 'behavior', 'attack_strength', 'spawn',
                   'update']
-
-    def create(self, validated_data):
-        # Create object behavior if it does not exist
-        behavior = validated_data['behavior']
-        if behavior is not None:
-            behaviors = Behavior.objects.filter(name=behavior)
-            if len(behaviors) > 0:
-                behavior = behaviors[0]
-            else:
-                behavior = None
-
-        # Create new mob
-        mob = Mob.objects.create(
-            name=validated_data['name'],
-            image=validated_data['image'],
-            health_points=validated_data['health_points'],
-            height=validated_data['height'],
-            width=validated_data['width'],
-            behavior=behavior,
-            attack_strength=validated_data['attack_strength'],
-            spawn=validated_data['spawn']
-        )
-        mob.save()
-        return mob

@@ -118,7 +118,7 @@
                                                 <b-form-input
                                                         id="behavior-input"
                                                         v-model="mob.behavior"
-                                                        placeholder="Enter new behavior"
+                                                        placeholder="Enter new behavior name"
                                                         v-else
                                                 ></b-form-input>
                                             </b-form-group>
@@ -235,7 +235,7 @@
                     preview: false,
                     error: null,
                     show: true,
-                    options: [],
+                    options: [{value: null, text: 'Please select a behavior'}],
                     newBehavior: false
                 }
             }
@@ -255,7 +255,7 @@
                 preview: false,
                 error: null,
                 show: true,
-                options: [],
+                options: [{value: null, text: 'Please select a behavior'}],
                 newBehavior: false
             };
         },
@@ -287,6 +287,7 @@
                     }
 
                     // Create new mob
+                    this.mob.image = this.preview;
                     await this.$axios.$post(`/mobs/`, this.mob);
                     await this.$router.replace('/wiki/mobs');
                 } catch (e) {

@@ -14,12 +14,14 @@
             </b-col>
         </b-row>
         <hr/>
-        <b-row>
+        <b-row class="mt-5">
             <b-col class="text-center" cols="4">
-                <b-img fluid rounded :src="block.image" alt=""></b-img>
+                <b-img v-if="block.image" fluid rounded :src="block.image" alt=""></b-img>
+                <b-img v-else fluid rounded src="https://img.icons8.com/color/480/000000/image.png" alt=""></b-img>
             </b-col>
             <b-col cols="8">
                 <table class="table table-hover">
+                    <caption>Details of {{ block.name }}</caption>
                     <tbody>
                     <tr>
                         <th scope="row">Stackable</th>
@@ -61,8 +63,14 @@
                     </tr>
                     <tr v-if="tools.length">
                         <th scope="row">Tools</th>
-                        <td v-for="tool of tools">
-                            <nuxt-link :to="`/wiki/items/${tool.id}/`">{{ tool.name }}</nuxt-link>
+                        <td>
+                            <b-list-group>
+                                <template v-for="tool of tools">
+                                    <b-list-group-item :to="`/wiki/items/${tool.id}/`">
+                                        {{ tool.name }}
+                                    </b-list-group-item>
+                                </template>
+                            </b-list-group>
                         </td>
                     </tr>
                     </tbody>

@@ -70,7 +70,7 @@
                                                 <b-form-input
                                                         id="material-input"
                                                         v-model="item.material"
-                                                        placeholder="Enter new material"
+                                                        placeholder="Enter new material name"
                                                         v-else
                                                 ></b-form-input>
                                             </b-form-group>
@@ -94,7 +94,7 @@
                                                 <b-form-input
                                                         id="type-input"
                                                         v-model="item.type"
-                                                        placeholder="Enter new type"
+                                                        placeholder="Enter new type name"
                                                         v-else
                                                 ></b-form-input>
                                             </b-form-group>
@@ -279,8 +279,8 @@
                     preview: false,
                     error: null,
                     show: true,
-                    materialOptions: [],
-                    typeOptions: [],
+                    materialOptions: [{value: null, text: 'Please select a material'}],
+                    typeOptions: [{value: null, text: 'Please select a type'}],
                     newMaterial: false,
                     newType: false
                 }
@@ -303,8 +303,8 @@
                 preview: false,
                 error: null,
                 show: true,
-                materialOptions: [],
-                typeOptions: [],
+                materialOptions: [{value: null, text: 'Please select a material'}],
+                typeOptions: [{value: null, text: 'Please select a type'}],
                 newMaterial: false,
                 newType: false
             };
@@ -347,6 +347,7 @@
                     }
 
                     // Create new item
+                    this.item.image = this.preview;
                     await this.$axios.$post(`/items/`, this.item);
                     await this.$router.replace('/wiki/items');
                 } catch (e) {

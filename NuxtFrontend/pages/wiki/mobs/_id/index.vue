@@ -2,6 +2,9 @@
     <b-container class="my-5">
         <b-row class="text-right mb-3">
             <b-col>
+                <nuxt-link is="b-button" :to="`/wiki/mobs/${mob.id}/edit/`" variant="secondary" v-if="isAuthenticated">
+                    Edit
+                </nuxt-link>
                 <nuxt-link is="b-button" to="/wiki/mobs" variant="success">Back</nuxt-link>
             </b-col>
         </b-row>
@@ -72,6 +75,7 @@
 
 <script>
     import {BIcon, BIconHeartFill, BIconHeartHalf, BIconLightning, BIconLightningFill} from "bootstrap-vue";
+    import {mapGetters} from 'vuex';
 
     export default {
         name: "mobIndex",
@@ -80,6 +84,9 @@
             return {
                 title: "Wiki | Mob Detail"
             };
+        },
+        computed: {
+            ...mapGetters(['isAuthenticated'])
         },
         async asyncData({$axios, params}) {
             try {
